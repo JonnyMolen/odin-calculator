@@ -53,6 +53,8 @@ h1 {
         width: 70%;
         
         }
+
+
         .right-header {
             display: flex;
             justify-content: center;
@@ -75,7 +77,7 @@ h1 {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgb(92, 221, 241);
+            background-color: rgb(255, 255, 255);
             width: 100%;
         }
 
@@ -97,6 +99,8 @@ h1 {
             width: 100%;
         }
 
+
+    /* Works the entire button layout */
         .button-display {
             display: flex;
             flex-direction: column;
@@ -107,21 +111,29 @@ h1 {
             height: 100%;
         }
 
+    /* Works the individual buttons themselves */
         .buttons {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 80px);
             display: grid;
-            justify-content: center;
+            justify-items: center;
             align-items: center;
             background-color: rgb(179, 255, 179);
-            width: 70%;
-            height: 70%;
+            width: auto;
+            height: auto;
+            padding: 10px;
+            gap: 10px;
         }
 
+    /* Works the individual buttons and content inside the buttons*/
         .btn {
             display: auto;
             background-color: lavenderblush;
             color: rgb(0, 0, 0);
-            height: 100%;
+            font-size: large;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-weight: bold;
         }
 
 
