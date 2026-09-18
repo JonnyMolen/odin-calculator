@@ -6,7 +6,7 @@ const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let num1 = 0;
 let operator;
 let num2 = 0
-
+let result = 0;
 
 
 // add action buttons that push user input into the display page
@@ -14,6 +14,24 @@ let num2 = 0
     const btn = document.querySelectorAll('.btn');
     const input = document.getElementById("input");
     const display = document.getElementById("display");
+
+function operate (num1, operator, num2) {
+    if (operator == "add") {
+        let newNum = addOperator(num1, num2);
+        result = newNum;
+    } else if (operator == "subtract") {
+        let newNum = subOperator(num1, num2);
+        result = newNum;
+    } else if (operator == "multiply") {
+        let newNum = multiplyOperator(num1, num2);
+        result = newNum;
+    } else if (operator == "divide") {
+        let newNum = divideOperator(num1, num2);
+        result = newNum;
+        }
+    return result;
+}
+
 
 // add
 function addOperator(num1, num2) {
@@ -79,56 +97,91 @@ function divideOperator(num1, num2) {
                 }
                 // equals
                 if (btn.id == "equals") {                     
-                    num2 = parseInt(input.textContent);
+                    num2 = parseFloat(input.textContent);
                     if (operator == "divide" && num2 == 0) {
                         display.textContent = ("You can't do that tsk tsk tsk");
                     }
-                    else if (operator == "add") {
-                    let newNum = addOperator(num1, num2);
-                    display.textContent = newNum;
-                    } else if (operator == "subtract") {
-                        let newNum = subOperator(num1, num2);
-                        display.textContent = newNum;
-                    } else if (operator == "multiply") {
-                        let newNum = multiplyOperator(num1, num2);
-                        display.textContent = newNum;
-                    } else if (operator == "divide") {
-                        let newNum = divideOperator(num1, num2);
+                    else {
+                        let newNum = operate(num1, operator, num2);
                         display.textContent = newNum;
                     }
+                    input.textContent = "";
                 }
 
                 // add
                 if (btn.id == "add") {
-                    num1 = parseInt(input.textContent);
+                    // pending calculation
+                    if (operator != undefined && operator != "" && input.textContent != "") {
+                        num2 = parseFloat(input.textContent);
+                        num1 = operate(num1, operator, num2);
+                        input.textContent = "";
+                    }
+                    if (input.textContent != "") {
+                        num1 = parseFloat(input.textContent);
+                    }
+
                     operator = "add";
                     input.textContent = "";
-                } 
+                }
+                
+                // subtract
                 if (btn.id == "subtract") {
-                    num1 = parseInt(input.textContent);
+                    // pending calculation
+                    if (operator != undefined && operator != "" && input.textContent != "") {
+                        num2 = parseFloat(input.textContent);
+                        num1 = operate(num1, operator, num2);
+                        input.textContent = "";
+                    }
+                    if (input.textContent != "") {
+                        num1 = parseFloat(input.textContent);
+                    }
+
                     operator = "subtract";
                     input.textContent = "";
                 } 
+
+                // multiply
                 if (btn.id == "multiply") {
-                    num1 = parseInt(input.textContent);
+                    // pending calculation
+                    if (operator != undefined && operator != "" && input.textContent != "") {
+                        num2 = parseFloat(input.textContent);
+                        num1 = operate(num1, operator, num2);
+                        input.textContent = "";
+                    }
+                    if (input.textContent != "") {
+                        num1 = parseFloat(input.textContent);
+                    }
+                    
                     operator = "multiply";
                     input.textContent = "";
                 }
-                if (btn.id == "divide") {
-                    num1 = parseInt(input.textContent);
-                    operator = "divide";
 
-                    if (num2 = "0") {
-                        text("Can't divide by 0 tsk tsk tsk");
-                    } else {
+
+                // divide
+                if (btn.id == "divide") {
+                    // pending calculation
+                    if (operator != undefined && operator != "" && input.textContent != "") {
+                        num2 = parseFloat(input.textContent);
+                        num1 = operate(num1, operator, num2);
                         input.textContent = "";
+                    }
+                    if (input.textContent != "") {
+                        num1 = parseFloat(input.textContent);
+                    }
+
+                    operator = "divide";
+                    input.textContent = "";
+                }
+
+                // decimal
+                if (btn.id == "decimal") {
+                    if(!input.textContent.includes(".")){
+                    input.textContent = input.textContent + ".";
                     }
                 }
             }  
     });
 });
-
-
 
 
     //user cannot do multiple symbols in a row
