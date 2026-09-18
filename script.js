@@ -2,9 +2,12 @@
 const symbols = ['add', 'subtract', 'divide', 'multiply', 'decimal', 'del', 'clear', 'equals'];
 const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+
 let num1 = 0;
 let operator;
 let num2 = 0
+
+
 
 // add action buttons that push user input into the display page
     //pressing a button
@@ -63,10 +66,13 @@ function divideOperator(num1, num2) {
             if (symbols.includes(btn.id)) {
                 //clear
                 if (btn.id == 'clear') {
+                    num1 = 0;
+                    num2 = 0;
+                    operator = "";
                     input.textContent = "";
                     display.textContent = "";
                 }
-                // //del
+                // del
                 if (btn.id == 'del') {
                 //removes the last digit
                     input.textContent = input.textContent.slice(0, -1);
@@ -74,7 +80,10 @@ function divideOperator(num1, num2) {
                 // equals
                 if (btn.id == "equals") {                     
                     num2 = parseInt(input.textContent);
-                    if (operator == "add") {
+                    if (operator == "divide" && num2 == 0) {
+                        display.textContent = ("You can't do that tsk tsk tsk");
+                    }
+                    else if (operator == "add") {
                     let newNum = addOperator(num1, num2);
                     display.textContent = newNum;
                     } else if (operator == "subtract") {
