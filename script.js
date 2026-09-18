@@ -32,7 +32,7 @@ function multiplyOperator(num1, num2) {
 // divide
 function divideOperator(num1, num2) {
     let result = num1 / num2;
-    return result;
+    return Math.round(result * 100) / 100;
 }
 
 
@@ -88,6 +88,7 @@ function divideOperator(num1, num2) {
                         display.textContent = newNum;
                     }
                 }
+
                 // add
                 if (btn.id == "add") {
                     num1 = parseInt(input.textContent);
@@ -107,7 +108,12 @@ function divideOperator(num1, num2) {
                 if (btn.id == "divide") {
                     num1 = parseInt(input.textContent);
                     operator = "divide";
-                    input.textContent = "";
+
+                    if (num2 = "0") {
+                        text("Can't divide by 0 tsk tsk tsk");
+                    } else {
+                        input.textContent = "";
+                    }
                 }
             }  
     });
