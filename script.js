@@ -2,12 +2,11 @@
 const symbols = ['add', 'subtract', 'divide', 'multiply', 'decimal', 'del', 'clear', 'equals'];
 const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-
+// Initializing Variables
 let num1 = 0;
 let operator;
 let num2 = 0
 let result = 0;
-
 
 // add action buttons that push user input into the display page
     //pressing a button
@@ -15,6 +14,7 @@ let result = 0;
     const input = document.getElementById("input");
     const display = document.getElementById("display");
 
+// Operate Function
 function operate (num1, operator, num2) {
     if (operator == "add") {
         let newNum = addOperator(num1, num2);
@@ -32,35 +32,35 @@ function operate (num1, operator, num2) {
     return result;
 }
 
+// Operator functions
+    // add
+    function addOperator(num1, num2) {
+        let result = num1 + num2;
+        return result;
+    }
 
-// add
-function addOperator(num1, num2) {
-    let result = num1 + num2;
-    return result;
-}
+    // subtract
+    function subOperator(num1, num2) {
+        let result = num1 - num2;
+        return result;
+    }
+    // multiply
+    function multiplyOperator(num1, num2) {
+        let result = num1 * num2;
+        return result;
+    }
 
-// subtract
-function subOperator(num1, num2) {
-    let result = num1 - num2;
-    return result;
-}
-// multiply
-function multiplyOperator(num1, num2) {
-    let result = num1 * num2;
-    return result;
-}
-
-// divide
-function divideOperator(num1, num2) {
-    let result = num1 / num2;
-    return Math.round(result * 100) / 100;
-}
+    // divide
+    function divideOperator(num1, num2) {
+        let result = num1 / num2;
+        return Math.round(result * 100) / 100;
+    }
 
 
-// later, inside your click listener, you can just use `display`
+    // Searches through buttons that are called
     btn.forEach((btn) => {
         
-        //numberr
+        // user inputting number
         btn.addEventListener("click", () => {
             //code for putting data into input
             if (nums.includes(parseInt(btn.textContent))) {
@@ -78,11 +78,12 @@ function divideOperator(num1, num2) {
             }
         });
 
-        //symbols
+
+        // User presses any of the symbols
         btn.addEventListener("click", () => {
             //pressing button
             if (symbols.includes(btn.id)) {
-                //clear
+                // clear
                 if (btn.id == 'clear') {
                     num1 = 0;
                     num2 = 0;
@@ -90,25 +91,30 @@ function divideOperator(num1, num2) {
                     input.textContent = "";
                     display.textContent = "";
                 }
-                // del
+
+                // ** Extra Credit: delete button
                 if (btn.id == 'del') {
-                //removes the last digit
+                    //removes the last digit
                     input.textContent = input.textContent.slice(0, -1);
                 }
-                // equals
+
+                // equal button
                 if (btn.id == "equals") {                     
                     num2 = parseFloat(input.textContent);
+                    // divide by 0
                     if (operator == "divide" && num2 == 0) {
                         display.textContent = ("You can't do that tsk tsk tsk");
                     }
+                    // run through operator function
                     else {
                         let newNum = operate(num1, operator, num2);
                         display.textContent = newNum;
                     }
+                    // resets input to blank
                     input.textContent = "";
                 }
 
-                // add
+                // add button
                 if (btn.id == "add") {
                     // pending calculation
                     if (operator != undefined && operator != "" && input.textContent != "") {
@@ -116,15 +122,16 @@ function divideOperator(num1, num2) {
                         num1 = operate(num1, operator, num2);
                         input.textContent = "";
                     }
+                    // if input is not blank, parse the input as num1
                     if (input.textContent != "") {
                         num1 = parseFloat(input.textContent);
                     }
-
+                    // switch operator to add
                     operator = "add";
                     input.textContent = "";
                 }
                 
-                // subtract
+                // subtract button
                 if (btn.id == "subtract") {
                     // pending calculation
                     if (operator != undefined && operator != "" && input.textContent != "") {
@@ -132,10 +139,11 @@ function divideOperator(num1, num2) {
                         num1 = operate(num1, operator, num2);
                         input.textContent = "";
                     }
+                    // if input is not blank, parse the input as num1
                     if (input.textContent != "") {
                         num1 = parseFloat(input.textContent);
                     }
-
+                    // switch operator to add
                     operator = "subtract";
                     input.textContent = "";
                 } 
@@ -148,16 +156,16 @@ function divideOperator(num1, num2) {
                         num1 = operate(num1, operator, num2);
                         input.textContent = "";
                     }
+                    // if input is not blank, parse the input as num1
                     if (input.textContent != "") {
                         num1 = parseFloat(input.textContent);
                     }
-                    
+                    // switch operator to multiply
                     operator = "multiply";
                     input.textContent = "";
                 }
 
-
-                // divide
+                // divide (special casess)
                 if (btn.id == "divide") {
                     // pending calculation
                     if (operator != undefined && operator != "" && input.textContent != "") {
@@ -165,15 +173,16 @@ function divideOperator(num1, num2) {
                         num1 = operate(num1, operator, num2);
                         input.textContent = "";
                     }
+                    // if input is not blank, parse the input as num1
                     if (input.textContent != "") {
                         num1 = parseFloat(input.textContent);
                     }
-
+                    // switch operator to divide
                     operator = "divide";
                     input.textContent = "";
                 }
 
-                // decimal
+                // ** Extra Credit: decimal implementation
                 if (btn.id == "decimal") {
                     if(!input.textContent.includes(".")){
                     input.textContent = input.textContent + ".";
@@ -182,8 +191,3 @@ function divideOperator(num1, num2) {
             }  
     });
 });
-
-
-    //user cannot do multiple symbols in a row
-
-// add hover color changer to the buttons
